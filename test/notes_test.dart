@@ -7,7 +7,16 @@ import 'package:notenest/note.dart';
 import 'package:notenest/notes_store.dart';
 
 class MemoryPreferences implements SharedPreferencesAsync {
-  String? value;
+  final Map<String, String> values = {};
+  String? get value => values['notenest.v1'];
+  set value(String? data) {
+    if (data == null) {
+      values.remove('notenest.v1');
+    } else {
+      values['notenest.v1'] = data;
+    }
+  }
+
   @override
   Future<String?> getString(String key) async => value;
   @override
